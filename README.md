@@ -2,7 +2,7 @@
 
 # GC Accelerators (AWS)
 
-This project will host the tools and templates to accelerate Microsoft Azure deployments.
+This project will host the tools and templates to accelerate Amazon Web Services (AWS) deployments.
 
 These tools and templates enable the GC's Cloud First direction and support for the GC Digital Standards.
 
@@ -22,7 +22,7 @@ ______________________
 
 # GC Accelerateurs (AWS)
 
-Outils et modèles pour accélérer la prestation de services du GC dans Azure.
+Outils et modèles pour accélérer la prestation de services du GC dans Amazon Web Services (AWS).
 
 ## Comment contribuer
 
