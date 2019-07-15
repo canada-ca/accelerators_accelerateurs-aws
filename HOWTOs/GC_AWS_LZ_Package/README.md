@@ -35,4 +35,4 @@ The GC Accelerator package for AWS Landing Zone contains documents and automatio
 
 *	AWS Landing Zone PBMM Controls Mapping – a mapping of Customer Responsibilities that aligns the GC Security Control Profile for Protected B, Medium Integrity, Medium Availability (PBMM) with AWS services and features that can assist in meeting governance controls.
 
-These DRAFT documents are available on the [GC/Code](https://gccode.ssc-spc.gc.ca/GCCloudEnablement/AWS/tree/master/GC%20Accelerator%20-%20AWS%20Landing%20Zone%20Package%20(July%202019)) site available for GC Access Only at this time. Please contact zztbscybers@tbs-sct.gc.ca for feedback on the documentation.
+These **DRAFT** documents are available on the [GC/Code](https://gccode.ssc-spc.gc.ca/GCCloudEnablement/AWS/tree/master/GC%20Accelerator%20-%20AWS%20Landing%20Zone%20Package%20(July%202019)) site available for GC Access Only at this time. Please forward any feedback on the documentation to zztbscybers@tbs-sct.gc.ca.
