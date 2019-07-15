@@ -17,7 +17,7 @@ The AWS Landing Zone establishes a foundation for departments using AWS cloud se
 The following are pre-requisites that must be implemented prior to proceeding with the core build steps:
 *	The solution is designed to be run in a brand new AWS account; 
 *	The account must have a Service Limit increase for a minimum of 10 AWS accounts in AWS Organizations. It is also recommended to request a Service Limit increase for 50 AWS CloudFormation StackSets.; and 
-*	Creation of a unique and valid email addresses in support of the establishment of the accounts that are created as part of the AWS Landing Zone deployment. This is outlined in the GC Accelerator Landing Zone Architecture [1] document.
+*	Creation of a unique and valid email addresses in support of the establishment of the accounts that are created as part of the AWS Landing Zone deployment. This is outlined in the GC Accelerator Landing Zone Architecture document.
 
 ## GC Accelerator: AWS Landing Zone Package
 
@@ -27,6 +27,6 @@ The GC Accelerator package for AWS Landing Zone contains documents and automatio
 *	AWS Landing Zone Core Build Book – a step-by-step build book of the Core services.
 *	AWS Landing Zone User Account Build Book - a step-by-step build book when creating new User Accounts.
 *	AWS Landing Zone Build Spreadsheet – a template to use while building the GC Accelerator – AWS Landing Zone Detailed Topology.
-*	AWS Landing Zone PBMM Controls Mapping – a mapping of Customer Responsibilities that aligns the GC Security Control Profile for Protected B, Medium Integrity, Medium Availability (PBMM) [6] with AWS services and features that can assist in meeting governance controls.
+*	AWS Landing Zone PBMM Controls Mapping – a mapping of Customer Responsibilities that aligns the GC Security Control Profile for Protected B, Medium Integrity, Medium Availability (PBMM) with AWS services and features that can assist in meeting governance controls.
 
 These documents are available on the GC/Code site available for GC Access Only at this time.
