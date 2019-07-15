@@ -10,7 +10,7 @@ Benefits include:
 
 The AWS Landing Zone establishes a foundation for departments using AWS cloud services. The following figure depicts a generic landing zone environment and the provides a notional view of the controls that is delivered via the AWS component.
 
-![Diagram](resources/aws-lz-design-pattern-example.png)
+![Diagram](GC_AWS_LZ_Package/aws-lz-design-pattern-example.png)
 
 ## Prerequisites
 
