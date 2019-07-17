@@ -1,0 +1,216 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "eni076d9fb525f1a3a2e": {
+            "Type": "String"
+        },
+        "eni0a838aeb7c54a9efd": {
+            "Type": "String"
+        },
+        "igw055ac28d88b9a805c": {
+            "Type": "String"
+        },
+        "subnet01805529366bb8ab1": {
+            "Type": "String"
+        },
+        "subnet031c07cc97cdd456c": {
+            "Type": "String"
+        },
+        "subnet061d1a20b5a0e9b36": {
+            "Type": "String"
+        },
+        "subnet0a811b3f3eb9a2cf7": {
+            "Type": "String"
+        },
+        "subnet0f65c691ac711196f": {
+            "Type": "String"
+        },
+        "vpc08bf684639ded31d9": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "rtb00404b6df41dfc37a": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Management Gateway Route Table"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb00404b6df41dfc37aassociation1": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rtb00404b6df41dfc37a"
+                },
+                "SubnetId": {
+                    "Ref": "subnet031c07cc97cdd456c"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "rtb00404b6df41dfc37aroute1": {
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "igw055ac28d88b9a805c"
+                },
+                "RouteTableId": {
+                    "Ref": "rtb00404b6df41dfc37a"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "rtb021453c98a04d4af8": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Untrust Interface Route Table"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb021453c98a04d4af8association1": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rtb021453c98a04d4af8"
+                },
+                "SubnetId": {
+                    "Ref": "subnet01805529366bb8ab1"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "rtb021453c98a04d4af8route1": {
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "igw055ac28d88b9a805c"
+                },
+                "RouteTableId": {
+                    "Ref": "rtb021453c98a04d4af8"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "rtb047854897f23ce68b": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Trust Interface Subnet Route Table"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb047854897f23ce68bassociation1": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rtb047854897f23ce68b"
+                },
+                "SubnetId": {
+                    "Ref": "subnet0f65c691ac711196f"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "rtb05a93d3e48e804554": {
+            "Properties": {
+                "Tags": [],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb0687f49480ebb66dd": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Transit Gateway Attachment Subnet Route Table"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb0687f49480ebb66ddassociation1": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rtb0687f49480ebb66dd"
+                },
+                "SubnetId": {
+                    "Ref": "subnet061d1a20b5a0e9b36"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "rtb0687f49480ebb66ddroute1": {
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NetworkInterfaceId": {
+                    "Ref": "eni0a838aeb7c54a9efd"
+                },
+                "RouteTableId": {
+                    "Ref": "rtb0687f49480ebb66dd"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        },
+        "rtb0bc7b7aac6474ffab": {
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Management Interface Route Table"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::RouteTable"
+        },
+        "rtb0bc7b7aac6474ffabassociation1": {
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "rtb0bc7b7aac6474ffab"
+                },
+                "SubnetId": {
+                    "Ref": "subnet0a811b3f3eb9a2cf7"
+                }
+            },
+            "Type": "AWS::EC2::SubnetRouteTableAssociation"
+        },
+        "rtb0bc7b7aac6474ffabroute1": {
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NetworkInterfaceId": {
+                    "Ref": "eni076d9fb525f1a3a2e"
+                },
+                "RouteTableId": {
+                    "Ref": "rtb0bc7b7aac6474ffab"
+                }
+            },
+            "Type": "AWS::EC2::Route"
+        }
+    }
+}

@@ -1,0 +1,410 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "acl0115e220fcc11a9dd": {
+            "Type": "String"
+        },
+        "acl04554bea9a32becf4": {
+            "Type": "String"
+        },
+        "acl0879e06e160c24f6b": {
+            "Type": "String"
+        },
+        "acl096daddde3bb62218": {
+            "Type": "String"
+        },
+        "acl09752a73f87735671": {
+            "Type": "String"
+        },
+        "acl0ca0becdd49266508": {
+            "Type": "String"
+        },
+		"networkSecurityVpcCidr" : {
+            "Type": "String"
+        },
+        "firewallManagementInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallUntrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallTrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallManagementGatewaySubnetCidr" : {
+            "Type": "String"
+		},
+		"managementTrafficSourceCidr" : {
+            "Type": "String"
+		},
+        "transitGatewayAttachmentSubnetCidr" : {
+            "Type": "String"
+		}
+    },
+    "Resources": {
+        "networkaclentry1": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl04554bea9a32becf4"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry11": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallManagementInterfaceSubnetCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry12": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry13": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry15": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallManagementInterfaceSubnetCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry16": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry17": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0115e220fcc11a9dd"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry19": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallTrustInterfaceSubnetCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry2": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl04554bea9a32becf4"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry20": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry21": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry23": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallTrustInterfaceSubnetCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry24": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry25": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl09752a73f87735671"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry27": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl096daddde3bb62218"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry28": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl096daddde3bb62218"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry30": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl096daddde3bb62218"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry31": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl096daddde3bb62218"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry33": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallManagementGatewaySubnetCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry34": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry35": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry37": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "firewallManagementGatewaySubnetCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry38": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry39": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0879e06e160c24f6b"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 10000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry4": {
+            "Properties": {
+                "CidrBlock": { "Ref" : "networkSecurityVpcCidr" },
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl04554bea9a32becf4"
+                },
+                "Protocol": "-1",
+                "RuleAction": "deny",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry5": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl04554bea9a32becf4"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 1000
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry7": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "true",
+                "NetworkAclId": {
+                    "Ref": "acl0ca0becdd49266508"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        },
+        "networkaclentry9": {
+            "Properties": {
+                "CidrBlock": "0.0.0.0/0",
+                "Egress": "false",
+                "NetworkAclId": {
+                    "Ref": "acl0ca0becdd49266508"
+                },
+                "Protocol": "-1",
+                "RuleAction": "allow",
+                "RuleNumber": 100
+            },
+            "Type": "AWS::EC2::NetworkAclEntry"
+        }
+    }
+}

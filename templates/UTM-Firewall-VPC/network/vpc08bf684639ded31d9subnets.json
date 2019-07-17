@@ -1,0 +1,198 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Outputs": {
+        "subnet01805529366bb8ab1": {
+            "Value": {
+                "Ref": "subnet01805529366bb8ab1"
+            }
+        },
+        "subnet031c07cc97cdd456c": {
+            "Value": {
+                "Ref": "subnet031c07cc97cdd456c"
+            }
+        },
+        "subnet061d1a20b5a0e9b36": {
+            "Value": {
+                "Ref": "subnet061d1a20b5a0e9b36"
+            }
+        },
+        "subnet0a811b3f3eb9a2cf7": {
+            "Value": {
+                "Ref": "subnet0a811b3f3eb9a2cf7"
+            }
+        },
+        "subnet0f65c691ac711196f": {
+            "Value": {
+                "Ref": "subnet0f65c691ac711196f"
+            }
+        }
+    },
+    "Parameters": {
+        "vpc08bf684639ded31d9": {
+            "Type": "String"
+        },
+        "networkSecurityVpcCidr" : {
+            "Type": "String"
+        },
+        "firewallManagementInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallUntrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallTrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallManagementGatewaySubnetCidr" : {
+            "Type": "String"
+		},
+		"managementTrafficSourceCidr" : {
+            "Type": "String"
+		},
+		"transitGatewayAttachmentSubnetCidr" : {
+            "Type": "String"
+		}
+    },
+    "Resources": {
+        "subnet01805529366bb8ab1": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select" : [ 
+                        "0", 
+                        { 
+                          "Fn::GetAZs" : "" 
+                        } 
+                    ]
+                },
+                "CidrBlock": { "Ref" : "firewallUntrustInterfaceSubnetCidr" },
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Untrust Interface Subnet"
+                    },
+                    {
+                        "Key": "DisasterRecoveryLogicalId",
+                        "Value": "subnet01805529366bb8ab1"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "subnet031c07cc97cdd456c": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select" : [ 
+                        "0", 
+                        { 
+                          "Fn::GetAZs" : "" 
+                        } 
+                    ]
+                },
+                "CidrBlock": { "Ref" : "firewallManagementGatewaySubnetCidr" },
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Management Gateway Subnet"
+                    },
+                    {
+                        "Key": "DisasterRecoveryLogicalId",
+                        "Value": "subnet031c07cc97cdd456c"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "subnet061d1a20b5a0e9b36": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select" : [ 
+                        "0", 
+                        { 
+                          "Fn::GetAZs" : "" 
+                        } 
+                    ]
+                },
+                "CidrBlock": { "Ref" : "transitGatewayAttachmentSubnetCidr" },
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Network Security Transit Gateway Attachment Subnet"
+                    },
+                    {
+                        "Key": "DisasterRecoveryLogicalId",
+                        "Value": "subnet061d1a20b5a0e9b36"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "subnet0a811b3f3eb9a2cf7": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select" : [ 
+                        "0", 
+                        { 
+                          "Fn::GetAZs" : "" 
+                        } 
+                    ]
+                },
+                "CidrBlock": { "Ref" : "firewallManagementInterfaceSubnetCidr" },
+                "MapPublicIpOnLaunch": "true",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Management Interface Subnet"
+                    },
+                    {
+                        "Key": "DisasterRecoveryLogicalId",
+                        "Value": "subnet0a811b3f3eb9a2cf7"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        },
+        "subnet0f65c691ac711196f": {
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select" : [ 
+                        "0", 
+                        { 
+                          "Fn::GetAZs" : "" 
+                        } 
+                    ]
+                },
+                "CidrBlock": { "Ref" : "firewallTrustInterfaceSubnetCidr" },
+                "MapPublicIpOnLaunch": "false",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Firewall Trust Interface Subnet"
+                    },
+                    {
+                        "Key": "DisasterRecoveryLogicalId",
+                        "Value": "subnet0f65c691ac711196f"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::Subnet"
+        }
+    }
+}

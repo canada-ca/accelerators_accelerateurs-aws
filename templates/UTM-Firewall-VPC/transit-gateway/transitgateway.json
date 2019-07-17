@@ -1,0 +1,61 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "transitGatewayId": {
+            "Type": "String"
+        },
+        "networkSecurityVpcId": {
+            "Type": "String"
+        },
+        "transitGatewayAttachmentSubnetId": {
+            "Type": "String"
+        },
+        "defaultAssociationRouteTableId": {
+            "Type": "String"
+        }
+    },
+    "Outputs": {
+        "utmfirewalltransitgatewayattachmentroutetableid": {
+            "Value": {
+                "Ref": "tgwroutetable"
+            }
+        }
+    },
+    "Resources": {
+        "tgwattachment": {
+          "Type" : "AWS::EC2::TransitGatewayAttachment",
+          "Properties" : {
+              "SubnetIds" : [ { "Ref" : "transitGatewayAttachmentSubnetId" }  ],
+              "TransitGatewayId" : { "Ref" : "transitGatewayId" },
+              "VpcId" : { "Ref" : "networkSecurityVpcId" }
+            }
+        },
+        "tgwroutetable": {
+              "Type" : "AWS::EC2::TransitGatewayRouteTable",
+              "Properties" : {
+                  "TransitGatewayId" : { "Ref" : "transitGatewayId" },
+                  "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "UTM Firewall VPC Transit Gateway Route Table"
+                        }
+                    ]
+                }
+        },
+        "tgwroutetableassociation": {
+              "Type" : "AWS::EC2::TransitGatewayRouteTableAssociation",
+              "Properties" : {
+                  "TransitGatewayAttachmentId" : { "Ref" : "tgwattachment" },
+                  "TransitGatewayRouteTableId" : { "Ref" : "tgwroutetable" }
+                }
+        },
+        "tgwroute": {
+          "Type" : "AWS::EC2::TransitGatewayRoute",
+          "Properties" : {
+              "DestinationCidrBlock" : "0.0.0.0/0",
+              "TransitGatewayAttachmentId" : { "Ref" : "tgwattachment" },
+              "TransitGatewayRouteTableId" : { "Ref" : "defaultAssociationRouteTableId" }
+            }
+        }
+    }
+}

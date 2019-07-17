@@ -1,0 +1,556 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+	"Parameters" : {
+		"TemplatesS3BucketName" : {
+			"Type" : "String",
+			"Description" : "Enter the name of the S3 bucket containing this template (and the nested templates).",
+			"MinLength": 1
+		},
+		"TemplatesS3BucketPath" : {
+			"Type" : "String",
+			"Description" : "Enter the prefix within the S3 bucket that contains this template (and the nested templates), without a leading slash but including a trailing slash."
+		},
+		"networkSecurityVpcCidr" : {
+			"Type" : "String",
+			"Description" : "Network Security VPC CIDR.  Use the 100.96 CIDR provided by SSC NEUB for integration with SCED.",
+			"MinLength": 1
+		},
+		"firewallManagementInterfaceSubnetCidr" : {
+			"Type" : "String",
+			"Description" : "Firewall Management Interface Subnet CIDR.  Enter a non-overlapping CIDR within the Network Security VPC CIDR.",
+			"MinLength": 1
+		},
+		"firewallUntrustInterfaceSubnetCidr" : {
+			"Type" : "String",
+			"Description" : "Firewall Untrust Interface Subnet CIDR.  Enter a non-overlapping CIDR within the Network Security VPC CIDR.",
+			"MinLength": 1
+		},
+		"firewallTrustInterfaceSubnetCidr" : {
+			"Type" : "String",
+			"Description" : "Firewall Trust Interface Subnet CIDR.  Enter a non-overlapping CIDR within the Network Security VPC CIDR.",
+			"MinLength": 1
+		},
+		"firewallManagementGatewaySubnetCidr" : {
+			"Type" : "String",
+			"Description" : "Firewall Management Gateway Subnet CIDR.  Enter a non-overlapping CIDR within the Network Security VPC CIDR.",
+			"MinLength": 1
+		},
+		"transitGatewayAttachmentSubnetCidr" : {
+			"Type" : "String",
+			"Description" : "Transit Gateway Attachment Subnet CIDR.  Enter a non-overlapping CIDR within the Network Security VPC CIDR.",
+			"MinLength": 1
+		},
+		"managementTrafficSourceCidr" : {
+			"Type" : "String",
+			"Description" : "Enter the source CIDR from which management traffic to the firewall will be allowed.",
+			"MinLength": 1
+		},
+		"utmFirewallAMIId" : {
+			"Type" : "String",
+			"Description" : "Enter the region specific AMI id of the UTM Firewall.  If this is a Marketplace image, ensure that you have already subscribed to the service through Marketplace.",
+			"MinLength": 1
+		},
+		"firewallManagementBastionAMIId" : {
+			"Type" : "String",
+			"Description" : "Enter the region specific AMI id to use for the UTM firewall management NAT bastion instance.",
+			"MinLength": 1
+		},
+		"awsKeyPairName" : {
+			"Type" : "AWS::EC2::KeyPair::KeyName",
+			"Description" : "Select the AWS Key Pair to be used when launching the UTM firewall EC2 instance and the firewall management bastion EC2 instance",
+			"MinLength": 1
+		},
+		"transitGatewayId" : {
+			"Type" : "String",
+			"Description" : "Enter the id of the existing Transit Gateway to which this UTM Firewall VPC will be attached.",
+			"MinLength": 1
+		},
+	    "defaultAssociationRouteTableId": {
+            "Type": "String"
+        }
+	},
+    "Outputs": {
+        "subnet01805529366bb8ab1": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "vpc08bf684639ded31d9subnets",
+                    "Outputs.subnet01805529366bb8ab1"
+                ]
+            }
+        },
+        "subnet031c07cc97cdd456c": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "vpc08bf684639ded31d9subnets",
+                    "Outputs.subnet031c07cc97cdd456c"
+                ]
+            }
+        },
+        "subnet061d1a20b5a0e9b36": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "vpc08bf684639ded31d9subnets",
+                    "Outputs.subnet061d1a20b5a0e9b36"
+                ]
+            }
+        },
+        "subnet0a811b3f3eb9a2cf7": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "vpc08bf684639ded31d9subnets",
+                    "Outputs.subnet0a811b3f3eb9a2cf7"
+                ]
+            }
+        },
+        "subnet0f65c691ac711196f": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "vpc08bf684639ded31d9subnets",
+                    "Outputs.subnet0f65c691ac711196f"
+                ]
+            }
+        }
+    },
+    "Resources": {
+        "vpc08bf684639ded31d9": {
+            "Properties": {
+				"Parameters": {
+					"networkSecurityVpcCidr" : {
+                        "Ref" : "networkSecurityVpcCidr"
+                    }
+				},
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9dhcp": {
+            "Properties": {
+                "Parameters": {
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9dhcp.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9internetgateway": {
+            "Properties": {
+                "Parameters": {
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9internet_gateway.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9networkaclentries1": {
+            "Properties": {
+                "Parameters": {
+                    "acl0115e220fcc11a9dd": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl0115e220fcc11a9dd"
+                        ]
+                    },
+                    "acl04554bea9a32becf4": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl04554bea9a32becf4"
+                        ]
+                    },
+                    "acl0879e06e160c24f6b": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl0879e06e160c24f6b"
+                        ]
+                    },
+                    "acl096daddde3bb62218": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl096daddde3bb62218"
+                        ]
+                    },
+                    "acl09752a73f87735671": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl09752a73f87735671"
+                        ]
+                    },
+                    "acl0ca0becdd49266508": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9networkacls",
+                            "Outputs.acl0ca0becdd49266508"
+                        ]
+                    },
+					"networkSecurityVpcCidr" : {
+                        "Ref" : "networkSecurityVpcCidr"
+                    },
+                    "firewallManagementInterfaceSubnetCidr" : {
+                        "Ref" : "firewallManagementInterfaceSubnetCidr"
+            		},
+            		"firewallUntrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallUntrustInterfaceSubnetCidr"
+            		},
+            		"firewallTrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallTrustInterfaceSubnetCidr"
+            		},
+            		"firewallManagementGatewaySubnetCidr" : {
+                        "Ref" : "firewallManagementGatewaySubnetCidr"
+            		},
+            		"managementTrafficSourceCidr" : {
+                        "Ref" : "managementTrafficSourceCidr"
+            		},
+            		"transitGatewayAttachmentSubnetCidr" : {
+                        "Ref" : "transitGatewayAttachmentSubnetCidr"
+            		}
+
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9network_acl_entries1.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9networkacls": {
+            "Properties": {
+                "Parameters": {
+                    "subnet01805529366bb8ab1": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet01805529366bb8ab1"
+                        ]
+                    },
+                    "subnet031c07cc97cdd456c": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet031c07cc97cdd456c"
+                        ]
+                    },
+                    "subnet061d1a20b5a0e9b36": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet061d1a20b5a0e9b36"
+                        ]
+                    },
+                    "subnet0a811b3f3eb9a2cf7": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0a811b3f3eb9a2cf7"
+                        ]
+                    },
+                    "subnet0f65c691ac711196f": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0f65c691ac711196f"
+                        ]
+                    },
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9network_acls.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9securitygrouprules1": {
+            "Properties": {
+                "Parameters": {
+                    "sg01cd1c4284ef2e467": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg01cd1c4284ef2e467"
+                        ]
+                    },
+                    "sg06b1edb15d9060b67": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg06b1edb15d9060b67"
+                        ]
+                    },
+                    "sg09be1f646a651240e": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg09be1f646a651240e"
+                        ]
+                    },
+                    "sg0ae2545795ce9bb9b": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg0ae2545795ce9bb9b"
+                        ]
+                    },
+                    "sg0db8d9e7d898e1e07": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg0db8d9e7d898e1e07"
+                        ]
+                    },
+                    "networkSecurityVpcCidr" : {
+                        "Ref" : "networkSecurityVpcCidr"
+                    },
+                    "firewallManagementInterfaceSubnetCidr" : {
+                        "Ref" : "firewallManagementInterfaceSubnetCidr"
+            		},
+            		"firewallUntrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallUntrustInterfaceSubnetCidr"
+            		},
+            		"firewallTrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallTrustInterfaceSubnetCidr"
+            		},
+            		"firewallManagementGatewaySubnetCidr" : {
+                        "Ref" : "firewallManagementGatewaySubnetCidr"
+            		},
+            		"managementTrafficSourceCidr" : {
+                        "Ref" : "managementTrafficSourceCidr"
+            		},
+            		"transitGatewayAttachmentSubnetCidr" : {
+                        "Ref" : "transitGatewayAttachmentSubnetCidr"
+            		}
+                    
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9security_group_rules1.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9securitygroups": {
+            "Properties": {
+                "Parameters": {
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9securitygroups.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "vpc08bf684639ded31d9subnets": {
+            "Properties": {
+                "Parameters": {
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    },
+                    "networkSecurityVpcCidr" : {
+                        "Ref" : "networkSecurityVpcCidr"
+                    },
+                    "firewallManagementInterfaceSubnetCidr" : {
+                        "Ref" : "firewallManagementInterfaceSubnetCidr"
+            		},
+            		"firewallUntrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallUntrustInterfaceSubnetCidr"
+            		},
+            		"firewallTrustInterfaceSubnetCidr" : {
+                        "Ref" : "firewallTrustInterfaceSubnetCidr"
+            		},
+            		"firewallManagementGatewaySubnetCidr" : {
+                        "Ref" : "firewallManagementGatewaySubnetCidr"
+            		},
+            		"managementTrafficSourceCidr" : {
+                        "Ref" : "managementTrafficSourceCidr"
+            		},
+            		"transitGatewayAttachmentSubnetCidr" : {
+                        "Ref" : "transitGatewayAttachmentSubnetCidr"
+            		}
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}network/vpc08bf684639ded31d9subnets.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "firewallmanagementbastioninstance": {
+            "Properties": {
+                "Parameters": {
+                    "subnet031c07cc97cdd456c": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet031c07cc97cdd456c"
+                        ]
+                    },
+                    "sg06b1edb15d9060b67": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg06b1edb15d9060b67"
+                        ]
+                    },
+                    "utmFirewallAMI": {
+                        "Ref" : "utmFirewallAMIId"
+                    },
+                    "utmFirewallManagementBastionAMI": {
+                        "Ref": "firewallManagementBastionAMIId"
+                    },
+                    "AWSKeyPairName": {
+                        "Ref": "awsKeyPairName"
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}instances/utm-firewall-management-bastion-instance.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "utmfirewalinstance": {
+            "Properties": {
+                "Parameters": {
+                    "subnet01805529366bb8ab1": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet01805529366bb8ab1"
+                        ]
+                    },
+                    "subnet0a811b3f3eb9a2cf7": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0a811b3f3eb9a2cf7"
+                        ]
+                    },
+                    "subnet0f65c691ac711196f": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0f65c691ac711196f"
+                        ]
+                    },
+                    "sg0ae2545795ce9bb9b": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg0ae2545795ce9bb9b"
+                        ]
+                    },
+                    "sg09be1f646a651240e": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg09be1f646a651240e"
+                        ]
+                    },
+                    "sg0db8d9e7d898e1e07": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9securitygroups",
+                            "Outputs.sg0db8d9e7d898e1e07"
+                        ]
+                    },
+                    "utmFirewallAMI": {
+                        "Ref": "utmFirewallAMIId"
+                    },
+                    "utmFirewallManagementBastionAMI": {
+                        "Ref": "firewallManagementBastionAMIId"
+                    },
+                    "AWSKeyPairName": {
+                        "Ref": "awsKeyPairName"
+                    }   
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}instances/utm-firewall-instance.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "routetables": {
+            "Properties": {
+                "Parameters": {
+                    "eni076d9fb525f1a3a2e": {
+                        "Fn::GetAtt": [
+                            "firewallmanagementbastioninstance",
+                            "Outputs.eni076d9fb525f1a3a2e"
+                        ]
+                    },
+                    "eni0a838aeb7c54a9efd": {
+                        "Fn::GetAtt": [
+                            "utmfirewalinstance",
+                            "Outputs.eni0a838aeb7c54a9efd"
+                        ]
+                    },
+                    "igw055ac28d88b9a805c": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9internetgateway",
+                            "Outputs.igw055ac28d88b9a805c"
+                        ]
+                    },
+                    "subnet01805529366bb8ab1": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet01805529366bb8ab1"
+                        ]
+                    },
+                    "subnet031c07cc97cdd456c": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet031c07cc97cdd456c"
+                        ]
+                    },
+                    "subnet061d1a20b5a0e9b36": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet061d1a20b5a0e9b36"
+                        ]
+                    },
+                    "subnet0a811b3f3eb9a2cf7": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0a811b3f3eb9a2cf7"
+                        ]
+                    },
+                    "subnet0f65c691ac711196f": {
+                      "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9subnets",
+                            "Outputs.subnet0f65c691ac711196f"
+                        ]
+                    },
+                    "vpc08bf684639ded31d9": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}route-tables/route_tables.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        },
+        "transitgatewayattachment": {
+            "Properties": {
+                "Parameters": {
+                    "transitGatewayId": {
+                        "Ref": "transitGatewayId"
+                    },
+                    "networkSecurityVpcId": {
+                        "Fn::GetAtt": [
+                            "vpc08bf684639ded31d9",
+                            "Outputs.vpc08bf684639ded31d9"
+                        ]
+                    },
+                    "transitGatewayAttachmentSubnetId": {
+                        "Fn::GetAtt": [
+                                "vpc08bf684639ded31d9subnets",
+                                "Outputs.subnet061d1a20b5a0e9b36"
+                        ]
+                    },
+                    "defaultAssociationRouteTableId": {
+                        "Ref": "defaultAssociationRouteTableId"
+                    }
+                },
+                "TemplateURL": { "Fn::Sub" : "https://s3.amazonaws.com/${TemplatesS3BucketName}/${TemplatesS3BucketPath}transit-gateway/transitgateway.json" },
+                "TimeoutInMinutes": 60
+            },
+            "Type": "AWS::CloudFormation::Stack"
+        }
+    }
+}

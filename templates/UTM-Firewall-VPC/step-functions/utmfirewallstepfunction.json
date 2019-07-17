@@ -1,0 +1,30 @@
+{
+  "StartAt": "Create UTM Firewall VPC",
+  "States": {
+  "Create UTM Firewall VPC": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+      "Next": "Create instances"
+    },
+     "Create instances": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+      "Next": "Create route tables"
+    },
+    "Create route tables": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+      "Next": "Create transit gateway attachment step 1"
+    },
+    "Create transit gateway attachment step 1": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+      "Next": "Create transit gateway attachment step 2"
+    },
+      "Create transit gateway attachment step 1": {
+      "Type": "Task",
+      "Resource": "arn:aws:lambda:REGION:ACCOUNT_ID:function:FUNCTION_NAME",
+      "End": true
+    }
+  }
+}

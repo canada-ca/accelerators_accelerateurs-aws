@@ -1,0 +1,30 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "vpc08bf684639ded31d9": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "doptb37136db": {
+            "Properties": {
+                "DomainName": "ca-central-1.compute.internal",
+                "DomainNameServers": [
+                    "AmazonProvidedDNS"
+                ]
+            },
+            "Type": "AWS::EC2::DHCPOptions"
+        },
+        "vpc08bf684639ded31d9doptb37136db": {
+            "Properties": {
+                "DhcpOptionsId": {
+                    "Ref": "doptb37136db"
+                },
+                "VpcId": {
+                    "Ref": "vpc08bf684639ded31d9"
+                }
+            },
+            "Type": "AWS::EC2::VPCDHCPOptionsAssociation"
+        }
+    }
+}

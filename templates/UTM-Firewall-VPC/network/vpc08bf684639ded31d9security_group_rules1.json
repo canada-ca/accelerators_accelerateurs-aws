@@ -1,0 +1,189 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "sg01cd1c4284ef2e467": {
+            "Type": "String"
+        },
+        "sg06b1edb15d9060b67": {
+            "Type": "String"
+        },
+        "sg09be1f646a651240e": {
+            "Type": "String"
+        },
+        "sg0ae2545795ce9bb9b": {
+            "Type": "String"
+        },
+        "sg0db8d9e7d898e1e07": {
+            "Type": "String"
+        },
+        "networkSecurityVpcCidr" : {
+            "Type": "String"
+        },
+        "firewallManagementInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallUntrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallTrustInterfaceSubnetCidr" : {
+            "Type": "String"
+		},
+		"firewallManagementGatewaySubnetCidr" : {
+            "Type": "String"
+		},
+		"managementTrafficSourceCidr" : {
+            "Type": "String"
+		},
+		"transitGatewayAttachmentSubnetCidr" : {
+            "Type": "String"
+		}
+    },
+    "Resources": {
+        "securitygroupegress12": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg0db8d9e7d898e1e07"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupEgress"
+        },
+        "securitygroupegress2": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg01cd1c4284ef2e467"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupEgress"
+        },
+        "securitygroupegress4": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg06b1edb15d9060b67"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupEgress"
+        },
+        "securitygroupegress6": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg09be1f646a651240e"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupEgress"
+        },
+        "securitygroupegress9": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg0ae2545795ce9bb9b"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupEgress"
+        },
+        "securitygroupingress1": {
+            "Properties": {
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg01cd1c4284ef2e467"
+                },
+                "IpProtocol": "-1",
+                "SourceSecurityGroupId": {
+                    "Ref": "sg01cd1c4284ef2e467"
+                },
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress10": {
+            "Properties": {
+                "CidrIp": { "Ref" : "managementTrafficSourceCidr" },
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg0db8d9e7d898e1e07"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress11": {
+            "Properties": {
+                "CidrIp": { "Ref" : "managementTrafficSourceCidr" },
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg0db8d9e7d898e1e07"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress3": {
+            "Properties": {
+                "CidrIp": { "Ref" : "managementTrafficSourceCidr" },
+                "FromPort": 22,
+                "GroupId": {
+                    "Ref": "sg06b1edb15d9060b67"
+                },
+                "IpProtocol": "tcp",
+                "ToPort": 22
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress5": {
+            "Properties": {
+                "CidrIp": "0.0.0.0/0",
+                "FromPort": "0",
+                "GroupId": {
+                    "Ref": "sg09be1f646a651240e"
+                },
+                "IpProtocol": "-1",
+                "ToPort": "65535"
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress7": {
+            "Properties": {
+                "CidrIp": { "Ref" : "firewallManagementGatewaySubnetCidr" },
+                "FromPort": 22,
+                "GroupId": {
+                    "Ref": "sg0ae2545795ce9bb9b"
+                },
+                "IpProtocol": "tcp",
+                "ToPort": 22
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        },
+        "securitygroupingress8": {
+            "Properties": {
+                "CidrIp": { "Ref" : "firewallManagementGatewaySubnetCidr" },
+                "FromPort": 443,
+                "GroupId": {
+                    "Ref": "sg0ae2545795ce9bb9b"
+                },
+                "IpProtocol": "tcp",
+                "ToPort": 443
+            },
+            "Type": "AWS::EC2::SecurityGroupIngress"
+        }
+    }
+}
