@@ -2,7 +2,7 @@
 
 AWS has developed a project called the AWS Secure Environment Accelerator (ASEA) with the goal to accelerate the GC’s Amazon Web Services (AWS) deployments. It can be found at: [https://github.com/aws-samples/aws-secure-environment-accelerator](https://github.com/aws-samples/aws-secure-environment-accelerator).
 
-The ASEA is a tool designed to help deploy and operate secure multi-account, multi-region AWS environments on an ongoing basis and it enables the GC’s Cloud First direction and support for the GC Digital Standards. Also, the ASEA reduces the amount of effort required to meet the 12 GC Cloud Guardrails from 60+ days to less than 3 days.
+The ASEA is a tool designed to help deploy and operate secure multi-account, multi-region AWS environments on an ongoing basis and it enables the GC’s Cloud First direction and support for the GC Digital Standards. The ASEA reduces the amount of effort required to meet the 12 GC Cloud Guardrails from 60+ days to less than 3 days.
 
 The users of this project will be Government of Canada employees deploying cloud-based workloads.
 
@@ -22,7 +22,7 @@ ______________________
 
 AWS a développé un projet appelé AWS Secure Environment Accelerator (ASEA) dans le but d'accélérer les déploiements Amazon Web Services (AWS) du GC. Il peut être trouvé à l’adresse suivante: [https://github.com/aws-samples/aws-secure-environment-accelerator](https://github.com/aws-samples/aws-secure-environment-accelerator).
 
-L’ASEA est un outil conçu pour aider à déployer et à gérer des environnements AWS sécurisés multi-comptes et multi-régions sur une base continue. Il permet d’orienter vers la direction du GC par l’informatique en nuage d’abord et de prendre en charge les normes numériques du GC. Aussi, l'ASEA réduit le montant d'effort requis pour répondre aux 12 mesures de sécurité en nuage du GC de 60 jours à moins de 3 jours.
+L’ASEA est un outil conçu pour aider à déployer et à gérer des environnements AWS sécurisés multi-comptes et multi-régions sur une base continue. Il permet d’orienter vers la direction du GC par l’informatique en nuage d’abord et de prendre en charge les normes numériques du GC. L'ASEA réduit le montant d'effort requis pour répondre aux 12 mesures de sécurité en nuage du GC de 60 jours à moins de 3 jours.
 
 Les utilisateurs de ce projet seront des employés du gouvernement du Canada qui déploieront des charges de travail en nuage.
 
