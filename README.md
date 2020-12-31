@@ -1,10 +1,8 @@
-([Français](#gc-accelerateurs-azure))
-
 # GC Accelerators (AWS)
 
-This project will host the tools and templates to accelerate Amazon Web Services (AWS) deployments.
+AWS has developed a project called the AWS Secure Environment Accelerator (ASEA) with the goal to accelerate the GC’s Amazon Web Services (AWS) deployments. It can be found at: [https://github.com/aws-samples/aws-secure-environment-accelerator](https://github.com/aws-samples/aws-secure-environment-accelerator) and it has been open-sourced by AWS under the Apache-2.0 License.
 
-These tools and templates enable the GC's Cloud First direction and support for the GC Digital Standards.
+The ASEA is a tool designed to help deploy and operate secure multi-account, multi-region AWS environments on an ongoing basis and it enables the GC’s Cloud First direction and support for the GC Digital Standards. Using automation, the ASEA reduces the amount of effort required to meet the [12 GC Cloud Guardrails](https://github.com/canada-ca/cloud-guardrails) to less than 3 days and also meets many of the Protected B, Medium Integrity, Medium Availability (PBMM) compliance requirements.
 
 The users of this project will be Government of Canada employees deploying cloud-based workloads.
 
@@ -20,9 +18,13 @@ The Canada wordmark and related graphics associated with this distribution are p
 
 ______________________
 
-# GC Accelerateurs (AWS)
+# Accélérateurs GC (AWS)
 
-Outils et modèles pour accélérer la prestation de services du GC dans Amazon Web Services (AWS).
+AWS a développé un projet appelé AWS Secure Environment Accelerator (ASEA) dans le but d'accélérer les déploiements Amazon Web Services (AWS) du GC. Il peut être trouvé à l’adresse suivante: [https://github.com/aws-samples/aws-secure-environment-accelerator](https://github.com/aws-samples/aws-secure-environment-accelerator) et il a été open-sourcé par AWS sous la licence Apache-2.0.
+
+L’ASEA est un outil conçu pour aider à déployer et à gérer des environnements AWS sécurisés multi-comptes et multi-régions sur une base continue. Il permet d’orienter vers la direction du GC par l’informatique en nuage d’abord et de prendre en charge les normes numériques du GC. Grâce à l'automatisation, l'ASEA réduit à moins de 3 jours le montant d'effort requis pour répondre aux [12 mesures de sécurité en nuage du GC](https://github.com/canada-ca/cloud-guardrails) et répond également à un grand nombre des exigences de conformité Protégé B, intégrité moyenne et disponibilité moyenne (PBMM).
+
+Les utilisateurs de ce projet seront des employés du gouvernement du Canada qui déploieront des charges de travail en nuage.
 
 ## Comment contribuer
 
@@ -33,4 +35,3 @@ Voir [CONTRIBUTING.md](CONTRIBUTING.md)
 Sauf indication contraire, le code source de ce projet est protégé par le droit d'auteur de la Couronne du gouvernement du Canada et distribué sous la [licence MIT](LICENSE).
 
 Le mot-symbole « Canada » et les éléments graphiques connexes liés à cette distribution sont protégés en vertu des lois portant sur les marques de commerce et le droit d'auteur. Aucune autorisation n'est accordée pour leur utilisation à l'extérieur des paramètres du programme de coordination de l'image de marque du gouvernement du Canada. Pour obtenir davantage de renseignements à ce sujet, veuillez consulter les [Exigences pour l'image de marque](https://www.canada.ca/fr/secretariat-conseil-tresor/sujets/communications-gouvernementales/exigences-image-marque.html).
-
